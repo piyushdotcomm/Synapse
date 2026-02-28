@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <!-- Geometric Synapse Logo (shadcn/ui aesthetic) -->
+    <style>
+      .bg { fill: #0a0a0a; }
+      .fg { stroke: #fafafa; stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .dot { fill: #fafafa; }
+    </style>
+  </defs>
+
+  <!-- Background (Optional, using transparent bounding area for flexibility, but adding a base for contrast if needed. We'll use a rounded square mask) -->
+  <rect width="128" height="128" rx="28" class="bg" />
+
+  <!-- The Synapse Connections -->
+  <g transform="translate(16, 16)">
+    <!-- Central Node -->
+    <circle cx="48" cy="48" r="8" class="dot" />
+    
+    <!-- Top Right Node -->
+    <circle cx="80" cy="24" r="6" class="dot" />
+    
+    <!-- Bottom Left Node -->
+    <circle cx="24" cy="72" r="6" class="dot" />
+    
+    <!-- Bottom Right Node -->
+    <circle cx="72" cy="80" r="6" class="dot" />
+
+    <!-- Connecting Lines -->
+    <path d="M 48 48 L 80 24" class="fg" />
+    <path d="M 48 48 L 24 72" class="fg" />
+    <path d="M 48 48 L 72 80" class="fg" />
+  </g>
+</svg>

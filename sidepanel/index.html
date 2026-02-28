@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Synapse</title>
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+  <!-- Header -->
+  <header id="header">
+    <div class="header-left">
+      <div class="logo-icon">
+        <img src="../icons/icon.svg" width="24" height="24" alt="Synapse" style="border-radius: 6px;" />
+      </div>
+      <h1 class="logo-text">Synapse</h1>
+    </div>
+    <div class="header-right">
+      <button id="btn-clear-chat" class="icon-btn" title="New chat">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 5v14M5 12h14"/>
+        </svg>
+      </button>
+      <button id="btn-settings" class="icon-btn" title="Settings">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Tab Navigation -->
+  <nav id="tab-nav">
+    <button class="tab-btn active" data-tab="chat">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      </svg>
+      Chat
+    </button>
+    <button class="tab-btn" data-tab="notes">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14 2 14 8 20 8"/>
+        <line x1="16" y1="13" x2="8" y2="13"/>
+        <line x1="16" y1="17" x2="8" y2="17"/>
+      </svg>
+      Notes
+    </button>
+    <button class="tab-btn" data-tab="extract">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+        <line x1="3" y1="9" x2="21" y2="9"/>
+        <line x1="3" y1="15" x2="21" y2="15"/>
+        <line x1="9" y1="3" x2="9" y2="21"/>
+        <line x1="15" y1="3" x2="15" y2="21"/>
+      </svg>
+      Extract
+    </button>
+    <button class="tab-btn" data-tab="connect">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+      </svg>
+      Connect
+    </button>
+  </nav>
+
+  <!-- Page Context Bar -->
+  <div id="page-context-bar" class="hidden">
+    <div class="context-icon">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="12" y1="16" x2="12" y2="12"/>
+        <line x1="12" y1="8" x2="12.01" y2="8"/>
+      </svg>
+    </div>
+    <span id="page-context-text">Reading page...</span>
+  </div>
+
+  <!-- Chat Tab -->
+  <div id="chat-panel" class="tab-panel active">
+    <div id="chat-messages">
+      <div class="welcome-message">
+        <img src="../icons/icon.svg" class="welcome-icon" width="48" height="48" alt="Synapse" style="border-radius: 12px; margin-bottom: 12px;" />
+        <h2>Hey! I'm Synapse</h2>
+        <p>Your AI copilot for the browser. I can read the page you're on and help you with anything.</p>
+        <div class="quick-actions">
+          <button class="quick-btn" data-prompt="Summarize this page">📝 Summarize page</button>
+          <button class="quick-btn" data-prompt="What are the key takeaways from this page?">💡 Key takeaways</button>
+          <button class="quick-btn" data-prompt="Extract all important data from this page">📊 Extract data</button>
+          <button class="quick-btn" data-prompt="Explain this page like I'm 5">🎯 ELI5</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="chat-input-container">
+      <div id="chat-input-wrapper">
+        <textarea id="chat-input" placeholder="Ask Synapse anything..." rows="1"></textarea>
+        <button id="btn-send" class="send-btn" disabled>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"/>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          </svg>
+        </button>
+      </div>
+      <div class="input-hint">
+        <span class="kbd">/</span> commands &nbsp; <span class="kbd">Shift+Enter</span> new line
+      </div>
+    </div>
+  </div>
+
+  <!-- Notes Tab -->
+  <div id="notes-panel" class="tab-panel">
+    <div id="notes-toolbar">
+      <input type="text" id="notes-search" placeholder="Search notes..." />
+      <button id="btn-add-note" class="icon-btn" title="Add note">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 5v14M5 12h14"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- New Note Form (hidden by default) -->
+    <div id="note-form" class="hidden">
+      <textarea id="note-input" placeholder="Write your note..."></textarea>
+      <div class="note-form-actions">
+        <button id="btn-save-note" class="primary-btn">Save Note</button>
+        <button id="btn-cancel-note" class="ghost-btn">Cancel</button>
+      </div>
+    </div>
+
+    <div id="notes-list">
+      <div class="empty-state">
+        <span class="empty-icon">📝</span>
+        <p>No notes yet</p>
+        <p class="sub">Click + to save your first note</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Extract Tab -->
+  <div id="extract-panel" class="tab-panel">
+    <div id="extract-toolbar">
+      <button id="btn-scan-page" class="primary-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+        </svg>
+        Scan Page
+      </button>
+      <button id="btn-export-csv" class="ghost-btn" disabled>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Export CSV
+      </button>
+    </div>
+
+    <div id="extract-results">
+      <div class="empty-state">
+        <span class="empty-icon">📊</span>
+        <p>No data extracted yet</p>
+        <p class="sub">Click "Scan Page" to find tables and structured data</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Connect Tab -->
+  <div id="connect-panel" class="tab-panel">
+    <div class="connect-header">
+      <h3 class="connect-title">Your Apps</h3>
+      <p class="connect-subtitle">Quick access to your tools & integrations</p>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="connect-section">
+      <div class="connect-section-title">⚡ Quick Actions</div>
+      <div class="quick-action-grid">
+        <button class="quick-action-card" id="qa-compose-email">
+          <div class="qa-icon" style="background: linear-gradient(135deg, #ea4335, #fbbc04);">✉️</div>
+          <span>Compose Email</span>
+        </button>
+        <button class="quick-action-card" id="qa-calendar">
+          <div class="qa-icon" style="background: linear-gradient(135deg, #4285f4, #34a853);">📅</div>
+          <span>Open Calendar</span>
+        </button>
+        <button class="quick-action-card" id="qa-search">
+          <div class="qa-icon" style="background: linear-gradient(135deg, #4285f4, #a142f4);">🔍</div>
+          <span>Google Search</span>
+        </button>
+        <button class="quick-action-card" id="qa-drive">
+          <div class="qa-icon" style="background: linear-gradient(135deg, #0f9d58, #4285f4);">📁</div>
+          <span>Google Drive</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Connected Apps -->
+    <div class="connect-section">
+      <div class="connect-section-title">🔗 Apps</div>
+      <div class="app-list">
+
+        <div class="app-card" data-app="google">
+          <div class="app-icon-wrap">
+            <div class="app-icon" style="background: linear-gradient(135deg, #4285f4, #34a853, #fbbc04, #ea4335);">G</div>
+          </div>
+          <div class="app-info">
+            <div class="app-name">Google</div>
+            <div class="app-desc">Gmail, Calendar, Sheets, Drive</div>
+          </div>
+          <button class="app-action-btn" data-url="https://myaccount.google.com">Open</button>
+        </div>
+
+        <div class="app-card" data-app="gmail">
+          <div class="app-icon-wrap">
+            <div class="app-icon" style="background: linear-gradient(135deg, #ea4335, #fbbc04);">📧</div>
+          </div>
+          <div class="app-info">
+            <div class="app-name">Gmail</div>
+            <div class="app-desc">Read & compose emails</div>
+          </div>
+          <button class="app-action-btn" data-url="https://mail.google.com">Open</button>
+        </div>
+
+        <div class="app-card" data-app="linkedin">
+          <div class="app-icon-wrap">
+            <div class="app-icon" style="background: #0a66c2;">in</div>
+          </div>
+          <div class="app-info">
+            <div class="app-name">LinkedIn</div>
+            <div class="app-desc">Profile data extraction via page</div>
+          </div>
+          <button class="app-action-btn" data-url="https://www.linkedin.com">Open</button>
+        </div>
+
+        <div class="app-card" data-app="whatsapp">
+          <div class="app-icon-wrap">
+            <div class="app-icon" style="background: #25d366;">💬</div>
+          </div>
+          <div class="app-info">
+            <div class="app-name">WhatsApp Web</div>
+            <div class="app-desc">Open WhatsApp in browser</div>
+          </div>
+          <button class="app-action-btn" data-url="https://web.whatsapp.com">Open</button>
+        </div>
+
+        <div class="app-card" data-app="youtube">
+          <div class="app-icon-wrap">
+            <div class="app-icon" style="background: #ff0000;">▶</div>
+          </div>
+          <div class="app-info">
+            <div class="app-name">YouTube</div>
+            <div class="app-desc">Video summaries & transcripts</div>
+          </div>
+          <button class="app-action-btn" data-url="https://www.youtube.com">Open</button>
+        </div>
+
+        <div class="app-card" data-app="notion">
+          <div class="app-icon-wrap">
+            <div class="app-icon" style="background: #000; border: 1px solid rgba(255,255,255,0.15);">N</div>
+          </div>
+          <div class="app-info">
+            <div class="app-name">Notion</div>
+            <div class="app-desc">Notes & project management</div>
+          </div>
+          <button class="app-action-btn" data-url="https://www.notion.so">Open</button>
+        </div>
+
+        <div class="app-card" data-app="sheets">
+          <div class="app-icon-wrap">
+            <div class="app-icon" style="background: #0f9d58;">📊</div>
+          </div>
+          <div class="app-info">
+            <div class="app-name">Google Sheets</div>
+            <div class="app-desc">Spreadsheets & data</div>
+          </div>
+          <button class="app-action-btn" data-url="https://sheets.google.com">Open</button>
+        </div>
+
+        <div class="app-card" data-app="github">
+          <div class="app-icon-wrap">
+            <div class="app-icon" style="background: #24292f;">🐙</div>
+          </div>
+          <div class="app-info">
+            <div class="app-name">GitHub</div>
+            <div class="app-desc">Code repositories</div>
+          </div>
+          <button class="app-action-btn" data-url="https://github.com">Open</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- LinkedIn Scanner -->
+    <div class="connect-section">
+      <div class="connect-section-title">🔍 LinkedIn Profile Scanner</div>
+      <p class="connect-subtitle" style="margin-bottom:8px">Open a LinkedIn profile, then click scan to extract their info</p>
+      <button id="btn-scan-linkedin" class="primary-btn" style="width:100%">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        Scan Current LinkedIn Profile
+      </button>
+      <div id="linkedin-result" class="linkedin-result hidden"></div>
+    </div>
+
+    <!-- Compose Email -->
+    <div class="connect-section">
+      <div class="connect-section-title">✉️ Quick Compose</div>
+      <div class="compose-form">
+        <input type="email" id="compose-to" placeholder="To: email@example.com" class="compose-input" />
+        <input type="text" id="compose-subject" placeholder="Subject" class="compose-input" />
+        <textarea id="compose-body" placeholder="Write your message..." class="compose-textarea" rows="3"></textarea>
+        <div class="compose-actions">
+          <button id="btn-ai-draft" class="ghost-btn">
+            🧠 AI Draft
+          </button>
+          <button id="btn-open-gmail" class="primary-btn">
+            📨 Open in Gmail
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div id="settings-modal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Settings</h2>
+        <button id="btn-close-settings" class="icon-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="setting-group">
+          <label for="api-key-input">Gemini API Key <span class="free-badge">FREE</span></label>
+          <p class="setting-desc">Get your free key at <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com</a></p>
+          <div class="api-key-wrapper">
+            <input type="password" id="api-key-input" placeholder="Enter your Gemini API key" />
+            <button id="btn-toggle-key" class="icon-btn" title="Show/hide key">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="setting-group">
+          <label for="model-select">AI Model</label>
+          <select id="model-select">
+            <option value="gemini-2.0-flash">Gemini 2.0 Flash (Fast, Free)</option>
+            <option value="gemini-2.0-flash-lite">Gemini 2.0 Flash Lite (Fastest)</option>
+            <option value="gemini-1.5-pro">Gemini 1.5 Pro (Best Quality)</option>
+          </select>
+        </div>
+
+        <div class="setting-group">
+          <label class="toggle-label">
+            <span>Memory</span>
+            <div class="toggle-switch">
+              <input type="checkbox" id="memory-toggle" checked />
+              <span class="toggle-slider"></span>
+            </div>
+          </label>
+          <p class="setting-desc">Remember conversations for context</p>
+        </div>
+
+        <button id="btn-save-settings" class="primary-btn full-width">Save Settings</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="sidepanel.js"></script>
+</body>
+</html>
