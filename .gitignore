@@ -10,3 +10,8 @@ node_modules/
 .cortex/
 .gemini/
 .env
+.agent/
+SKILL.md
+skills-lock.json
+temp-agent-toolkit/
+icons/*.png
