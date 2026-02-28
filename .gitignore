@@ -1,4 +1,12 @@
-/.agent
-/.agents
-/SKILL.md
-/skills-lock.json
+node_modules/
+.DS_Store
+*.log
+.agents/
+.augment/
+.claude/
+.codebuddy/
+.commandcode/
+.continue/
+.cortex/
+.gemini/
+.env
